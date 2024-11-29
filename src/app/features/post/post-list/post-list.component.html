@@ -1,0 +1,22 @@
+<div *ngIf="mode != 'profile'">
+  <app-home-post-filter-header 
+  (filterChangeEvent)="onFilterChange($event)"></app-home-post-filter-header>
+  <div class="main-content" [ngClass]="!animatePostList?'animated-element':'animated-enter'"
+  infiniteScroll
+  [infiniteScrollDistance]="2"
+  [infiniteScrollThrottle]="150"
+  (scrolled)="onScroll()">
+    <div *ngFor="let post of posts">
+      <app-post-container [post]="post" (deletionEvent)="onPostDeletion($event)"></app-post-container>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="mode == 'profile'">
+  <div class="main-content p-0" [ngClass]="!animatePostList?'animated-element':'animated-enter'">
+    <div *ngFor="let post of posts">
+      <app-post-container [width]="'w-100'" [post]="post"
+        (deletionEvent)="onPostDeletion($event)"></app-post-container>
+    </div>
+  </div>
+</div>
